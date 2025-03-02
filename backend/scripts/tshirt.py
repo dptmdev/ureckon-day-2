@@ -12,29 +12,36 @@ pose = mp_pose.Pose()
 mp_drawing = mp.solutions.drawing_utils
 
 # Define the path to the images directory
-IMAGES_DIR =  os.path.abspath('images')
+IMAGES_DIR = os.path.abspath('images')
 
 # Load the clothing image (transparent PNG)
+
+
 def load_clothing_image(product_name):
-    #image_path = os.path.join(IMAGES_DIR, f'{product_name}.png')  # Path to the image
-    image_path = os.path.join( f'{product_name}.png')
+    # image_path = os.path.join(IMAGES_DIR, f'{product_name}.png')  # Path to the image
+    image_path = os.path.join(f'{product_name}.png')
     if not os.path.isfile(image_path):
         print(f"Error: The image file '{image_path}' does not exist.")
         sys.exit(1)
     return cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
 
 # Resize clothing based on body size
+
+
 def resize_clothing(clothing, scale_width, scale_height):
     return cv2.resize(clothing, (scale_width, scale_height), interpolation=cv2.INTER_AREA)
 
 # Overlay the clothing on the body using pose landmarks
+
+
 def overlay_clothing(frame, clothing, landmarks):
     left_shoulder = landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER]
     right_shoulder = landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER]
     left_hip = landmarks[mp_pose.PoseLandmark.LEFT_HIP]
     right_hip = landmarks[mp_pose.PoseLandmark.RIGHT_HIP]
 
-    shoulder_width = abs((right_shoulder.x - left_shoulder.x)*1.8) * frame.shape[1]
+    shoulder_width = abs(
+        (right_shoulder.x - left_shoulder.x)*1.8) * frame.shape[1]
     torso_height = abs((left_hip.y - left_shoulder.y)*1.4) * frame.shape[0]
 
     body_width = int(shoulder_width)
@@ -43,7 +50,8 @@ def overlay_clothing(frame, clothing, landmarks):
     body_width = max(1, body_width)
     body_height = max(1, body_height)
 
-    x_offset = int((left_shoulder.x + right_shoulder.x)/2 * frame.shape[1]) - body_width // 2
+    x_offset = int((left_shoulder.x + right_shoulder.x) /
+                   2 * frame.shape[1]) - body_width // 2
     y_offset = int(int(left_shoulder.y * frame.shape[0]) - body_height // 6.5)
 
     if x_offset < 0:
@@ -65,9 +73,11 @@ def overlay_clothing(frame, clothing, landmarks):
         for c in range(0, 3):
             frame[y_offset:y_offset + body_height, x_offset:x_offset + body_width, c] = (
                 alpha[:, :] * resized_clothing[:, :, c] +
-                inv_alpha[:, :] * frame[y_offset:y_offset + body_height, x_offset:x_offset + body_width, c]
+                inv_alpha[:, :] * frame[y_offset:y_offset +
+                                        body_height, x_offset:x_offset + body_width, c]
             )
     return frame
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
@@ -90,7 +100,8 @@ if __name__ == "__main__":
         results = pose.process(rgb_frame)
 
         if results.pose_landmarks:
-            mp_drawing.draw_landmarks(frame, results.pose_landmarks, mp_pose.POSE_CONNECTIONS)
+            mp_drawing.draw_landmarks(
+                frame, results.pose_landmarks, mp_pose.POSE_CONNECTIONS)
             landmarks = results.pose_landmarks.landmark
             frame = overlay_clothing(frame, clothing_image, landmarks)
 
