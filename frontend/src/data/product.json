@@ -1,0 +1,42 @@
+{
+    "products": [
+    {
+      "id": "1",
+      "name": "cap",
+      "price": 550.00,
+      "image": "/assets/images/cap1.png",
+      "details": "A high-quality cap suitable for all seasons.",
+      "rating": 4.5,
+      "reviews": 3
+    },
+    {
+      "id": "2",
+      "name": "Necklace",
+      "price": 850.00,
+      "image": "/assets/images/necklesh.png",
+      "details": "Elegant necklace perfect for any occasion.",
+      "rating": 4.0,
+      "reviews": 5
+    },
+    {
+      "id": "3",
+      "name": "T-Shirt",
+      "price": 1200.00,
+      "image": "/assets/images/tshirt.png",
+      "details": "Comfortable and stylish t-shirt.",
+      "rating": 4.8,
+      "reviews": 10
+    },
+    {
+      "id": "4",
+      "name": "Handbag",
+      "price": 950.00,
+      "image": "/assets/images/product17.jpg",
+      "details": "A chic handbag for everyday use.",
+      "rating": 4.2,
+      "reviews": 7
+    }
+  ]
+}
+
+  

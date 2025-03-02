@@ -1,0 +1,43 @@
+.beautysec {
+    position: relative;
+}
+
+.beauty-slider .item {
+    position: relative;
+}
+
+.beauty-slider .item img {
+    width: 100%;
+    height: auto;
+}
+
+.slider-text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: #fff;
+    
+    padding: 20px;
+}
+
+.slider-text h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.slider-text h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.slider-btn {
+    color: #fff;
+    background-color: #007bff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.slick-dots {
+    bottom: 10px;
+}
